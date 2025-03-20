@@ -21,11 +21,21 @@ const ResourceSection: React.FC = () => {
 
   // Handle resource card hover
   const handleResourceHover = (id: number | null) => {
-    // If hovering a new resource, set active to null and hovered to the new one
-    if (id !== null && id !== activeResource) {
-      setActiveResource(null);
-    }
+    // If hovering on any card, make sure only that one is hovered
     setHoveredResource(id);
+    
+    // If we're hovering on a card that's not the first one, make the first one not active
+    // If we're hovering on the first one or nothing, set the first one to be active
+    if (resources && resources.length > 0) {
+      const firstResourceId = resources[0].id;
+      if (id !== null && id !== firstResourceId) {
+        setActiveResource(id);
+      } else if (id === null) {
+        setActiveResource(firstResourceId);
+      } else {
+        setActiveResource(id);
+      }
+    }
   };
 
   // Handle resource card click
@@ -83,8 +93,6 @@ const ResourceSection: React.FC = () => {
         
         {/* Resources on the right */}
         <div className="md:w-2/3 relative">
-          {/* Neon flash effect behind resources */}
-          <div className="absolute -inset-4 bg-white/20 blur-xl z-0 animate-neon"></div>
           
           <div 
             ref={containerRef}
@@ -94,7 +102,7 @@ const ResourceSection: React.FC = () => {
             {resources?.map((resource: Resource, index) => (
               <div
                 key={resource.id}
-                className={`resource-card neon-flash flex-shrink-0 ${
+                className={`resource-card flex-shrink-0 ${
                   hoveredResource === resource.id || activeResource === resource.id
                     ? 'w-72 md:w-80'
                     : 'w-32 md:w-36'
