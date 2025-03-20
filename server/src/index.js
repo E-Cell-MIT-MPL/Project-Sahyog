@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 // TODO production main isse comment kar denge, abhi sirf logging ke liye
-app.use(morgan("dev")); 
+app.use(morgan("dev"));
 
 // Routes
 // TODO kuch aisa app.use('/api/auth', authroutes);
