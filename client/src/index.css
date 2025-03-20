@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 50 100% 91%;
+    --foreground: 222 47.4% 20%;
+    
+    --card: 37 55% 82%;
+    --card-foreground: 222 47.4% 20%;
+    
+    --popover: 50 100% 91%;
+    --popover-foreground: 222 47.4% 20%;
+    
+    --primary: 222 47.4% 20%;
+    --primary-foreground: 50 100% 91%;
+    
+    --secondary: 17 62% 72%;
+    --secondary-foreground: 222 47.4% 20%;
+    
+    --muted: 50 100% 91%;
+    --muted-foreground: 222 47.4% 40%;
+    
+    --accent: 37 55% 82%;
+    --accent-foreground: 222 47.4% 20%;
+    
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 222 30% 85%;
+    --input: 50 100% 91%;
+    --ring: 222 47.4% 20%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background: linear-gradient(to bottom, #F3D77F 0%, #E79E8A 50%, #CDB3D4 100%);
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+.resource-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 29, 78, 0.5) rgba(248, 244, 233, 0.1);
+}
+
+.resource-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.resource-container::-webkit-scrollbar-track {
+  background: rgba(248, 244, 233, 0.1);
+  border-radius: 10px;
+}
+
+.resource-container::-webkit-scrollbar-thumb {
+  background-color: rgba(20, 29, 78, 0.5);
+  border-radius: 10px;
+}
+
+.resource-card {
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn {
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #2A3A77;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.upload-btn {
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #E9D5B8;
+  color: #141D4E;
+}
+
+@media (max-width: 640px) {
+  body {
+    background: linear-gradient(to bottom, #F3D77F 0%, #E79E8A 40%, #CDB3D4 100%);
+  }
+}
