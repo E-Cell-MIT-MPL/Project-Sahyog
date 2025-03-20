@@ -19,7 +19,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.use(morgan("dev"));
+// TODO production main isse comment kar denge, abhi sirf logging ke liye
+app.use(morgan("dev")); 
 
 // Routes
 // TODO kuch aisa app.use('/api/auth', authroutes);
