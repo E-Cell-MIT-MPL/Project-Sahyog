@@ -44,7 +44,12 @@ const ResourceSection: React.FC = () => {
     if (id !== activeResource) {
       setActiveResource(id);
     } else {
-      setActiveResource(null);
+      // If the first resource is clicked and it's already active, keep it active
+      if (resources && resources.length > 0 && id === resources[0].id) {
+        setActiveResource(id);
+      } else {
+        setActiveResource(null);
+      }
     }
     
     // Center the clicked card
@@ -96,7 +101,7 @@ const ResourceSection: React.FC = () => {
           
           <div 
             ref={containerRef}
-            className="flex justify-start space-x-6 max-w-full overflow-x-auto pb-8 z-10 relative"
+            className="flex justify-start space-x-8 max-w-full overflow-x-auto pb-8 z-10 relative px-4 py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {resources?.map((resource: Resource, index) => (
@@ -104,9 +109,9 @@ const ResourceSection: React.FC = () => {
                 key={resource.id}
                 className={`resource-card flex-shrink-0 ${
                   hoveredResource === resource.id || activeResource === resource.id
-                    ? 'w-72 md:w-80'
-                    : 'w-32 md:w-36'
-                } h-64 md:h-80 bg-[#E8D4C3] bg-opacity-90 rounded-md cursor-pointer relative transition-all duration-500 
+                    ? 'w-80'
+                    : 'w-40'
+                } h-80 bg-[#E8D4C3] bg-opacity-90 rounded-md cursor-pointer relative transition-all duration-500 ease-in-out
                   ${hoveredResource === resource.id
                     ? 'z-20 shadow-md'
                     : activeResource === resource.id
@@ -120,8 +125,8 @@ const ResourceSection: React.FC = () => {
               >
                 {/* For non-expanded cards, show vertical text at the bottom right */}
                 {(hoveredResource !== resource.id && activeResource !== resource.id) && (
-                  <div className="absolute bottom-4 right-4">
-                    <h3 className="font-serif font-bold text-black tracking-wide writing-mode-vertical text-rotate-90 uppercase">
+                  <div className="absolute bottom-6 right-4">
+                    <h3 className="font-serif font-bold text-black tracking-wide writing-mode-vertical text-rotate-90 uppercase text-lg">
                       {resource.title}
                     </h3>
                   </div>
@@ -129,13 +134,25 @@ const ResourceSection: React.FC = () => {
                 
                 {/* For expanded cards, show horizontal content */}
                 {(hoveredResource === resource.id || activeResource === resource.id) && (
-                  <div className="p-4 flex flex-col h-full">
-                    <h3 className="font-serif font-bold text-black tracking-wide text-xl mb-3">
-                      {resource.title}
-                    </h3>
-                    <p className="text-sm font-sans text-gray-700 animate-fadeIn">
-                      {resource.description}
-                    </p>
+                  <div className="p-6 flex flex-col h-full justify-between">
+                    <div>
+                      <h3 className="font-serif font-bold text-black tracking-wide text-xl mb-4">
+                        {resource.title}
+                      </h3>
+                      <p className="text-sm font-sans text-gray-700">
+                        {resource.description}
+                      </p>
+                    </div>
+                    {resource.link && (
+                      <a 
+                        href={resource.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-sm text-purple-700 hover:text-purple-900 underline mt-4 inline-block"
+                      >
+                        Learn more
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
