@@ -70,7 +70,7 @@
   -ms-overflow-style: none;
 }
 
-/* Animation for fade in */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -80,13 +80,57 @@
   animation: fadeIn 0.5s ease-in-out;
 }
 
+@keyframes popIn {
+  0% { 
+    transform: scale(0) rotate(0deg); 
+    opacity: 0; 
+  }
+  70% { 
+    transform: scale(1.2) rotate(360deg); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(1) rotate(360deg); 
+    opacity: 1; 
+  }
+}
+
+.animate-popIn {
+  animation: popIn 0.8s ease-out forwards;
+}
+
+@keyframes floatLogo {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
 .resource-card {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .resource-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  transition: all 0.5s ease;
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
 }
 
 .submit-btn {
