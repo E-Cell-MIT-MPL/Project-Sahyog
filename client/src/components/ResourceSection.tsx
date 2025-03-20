@@ -90,18 +90,18 @@ const ResourceSection: React.FC = () => {
       {/* Resource container with tagline to the left */}
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
         {/* Tagline on the left */}
-        <div className="md:w-1/3 px-6 mb-8 md:mb-0 md:pr-12">
+        <div className="md:w-1/4 px-6 mb-8 md:mb-0 md:pr-6">
           <p className="text-lg md:text-xl text-gray-700 italic font-serif leading-relaxed">
             "Bridging the gap between<br />ideation<br />and execution for aspiring<br />entrepreneurs."
           </p>
         </div>
         
         {/* Resources on the right */}
-        <div className="md:w-2/3 relative">
+        <div className="md:w-3/4 relative">
           
           <div 
             ref={containerRef}
-            className="flex justify-start space-x-8 max-w-full overflow-x-auto pb-8 z-10 relative px-4 py-4"
+            className="flex justify-start space-x-4 max-w-full overflow-x-auto pb-8 z-10 relative px-4 py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {resources?.map((resource: Resource, index) => (
@@ -109,9 +109,9 @@ const ResourceSection: React.FC = () => {
                 key={resource.id}
                 className={`resource-card flex-shrink-0 ${
                   hoveredResource === resource.id || activeResource === resource.id
-                    ? 'w-80'
-                    : 'w-40'
-                } h-80 bg-[#E8D4C3] bg-opacity-90 rounded-md cursor-pointer relative transition-all duration-500 ease-in-out
+                    ? 'w-64 md:w-72'
+                    : 'w-32 md:w-36'
+                } h-72 bg-[#E8D4C3] bg-opacity-90 rounded-md cursor-pointer relative transition-all duration-500 ease-in-out
                   ${hoveredResource === resource.id
                     ? 'z-20 shadow-md'
                     : activeResource === resource.id
