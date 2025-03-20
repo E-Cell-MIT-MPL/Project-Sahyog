@@ -30,7 +30,11 @@ const formSchema = insertPitchSchema.extend({
   startupName: z.string().min(1, "Startup name is required"),
 });
 
-const PitchForm: React.FC = () => {
+interface PitchFormProps {
+  showLogoAnimation?: boolean;
+}
+
+const PitchForm: React.FC<PitchFormProps> = ({ showLogoAnimation = false }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { toast } = useToast();
 
@@ -92,13 +96,20 @@ const PitchForm: React.FC = () => {
         <FiZap size={60} className="text-yellow-400 animate-pulse opacity-80" />
       </div>
       
+      {/* Logo animation beside the form */}
       <div className="hidden md:flex flex-col items-center justify-center md:w-1/3">
-        <div className="mb-6">
-          <FiZap size={100} className="text-yellow-400 animate-pulse opacity-80" />
-        </div>
-        <div className="text-center">
-          <h3 className="text-white text-xl font-bold mb-2">BUSINESS CLINIC</h3>
-          <p className="text-white opacity-90">Ideas Come to Life</p>
+        <div className={`transition-all duration-700 ${
+          showLogoAnimation 
+            ? 'opacity-100 transform translate-y-0'
+            : 'opacity-0 transform translate-y-20'
+        }`}>
+          <div className={`mb-6 ${showLogoAnimation ? 'animate-popIn animate-float' : ''}`}>
+            <FiZap size={100} className="text-yellow-400 animate-pulse opacity-80" />
+          </div>
+          <div className={`text-center ${showLogoAnimation ? 'animate-fadeIn' : ''}`}>
+            <h3 className="text-white text-xl font-bold mb-2">BUSINESS CLINIC</h3>
+            <p className="text-white opacity-90">Ideas Come to Life</p>
+          </div>
         </div>
       </div>
       

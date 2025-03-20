@@ -67,9 +67,9 @@ const ResourceSection: React.FC = () => {
               key={resource.id}
               className={`resource-card flex-shrink-0 ${
                 hoveredResource === resource.id || activeResource === resource.id
-                  ? 'w-72 h-44 md:w-80 md:h-52'
-                  : 'w-32 h-64 md:w-36 md:h-80'
-              } bg-[#E8D4C3] bg-opacity-90 rounded-md p-4 cursor-pointer flex items-center justify-center transition-all duration-500 
+                  ? 'w-72 md:w-80'
+                  : 'w-32 md:w-36'
+              } h-64 md:h-80 bg-[#E8D4C3] bg-opacity-90 rounded-md cursor-pointer relative transition-all duration-500 
                 ${hoveredResource === resource.id
                   ? 'z-10 shadow-md'
                   : activeResource === resource.id
@@ -81,24 +81,26 @@ const ResourceSection: React.FC = () => {
               onMouseEnter={() => handleResourceHover(resource.id)}
               onMouseLeave={() => handleResourceHover(null)}
             >
-              <div className={`transition-all duration-300 ${
-                hoveredResource === resource.id || activeResource === resource.id 
-                  ? 'text-center' 
-                  : 'vertical-text'
-              }`}>
-                <h3 className={`font-serif font-bold text-black tracking-wide ${
-                  hoveredResource === resource.id || activeResource === resource.id
-                    ? 'text-xl mb-3'
-                    : 'mb-0 writing-mode-vertical text-rotate-90'
-                }`}>
-                  {resource.title}
-                </h3>
-                {(hoveredResource === resource.id || activeResource === resource.id) && (
-                  <p className="text-sm font-sans text-gray-700 animate-fadeIn mt-2">
+              {/* For non-expanded cards, show vertical text at the bottom right */}
+              {(hoveredResource !== resource.id && activeResource !== resource.id) && (
+                <div className="absolute bottom-4 right-4">
+                  <h3 className="font-serif font-bold text-black tracking-wide writing-mode-vertical text-rotate-90 uppercase">
+                    {resource.title}
+                  </h3>
+                </div>
+              )}
+              
+              {/* For expanded cards, show horizontal content */}
+              {(hoveredResource === resource.id || activeResource === resource.id) && (
+                <div className="p-4 flex flex-col h-full">
+                  <h3 className="font-serif font-bold text-black tracking-wide text-xl mb-3">
+                    {resource.title}
+                  </h3>
+                  <p className="text-sm font-sans text-gray-700 animate-fadeIn">
                     {resource.description}
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
