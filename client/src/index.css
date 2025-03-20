@@ -45,7 +45,7 @@
   
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    background: linear-gradient(to bottom, #E8D4C3 0%, #E0A790 50%, #5B3275 100%);
+    background: linear-gradient(135deg, #E8D4C3 0%, #E0A790 50%, #5B3275 100%);
     min-height: 100vh;
   }
   
@@ -105,8 +105,42 @@
   100% { transform: translateY(0px); }
 }
 
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3);
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3);
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .animate-float {
   animation: floatLogo 3s ease-in-out infinite;
+}
+
+.animate-neon {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 .resource-card {
@@ -131,6 +165,24 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: all 0.5s ease;
+}
+
+.neon-flash {
+  position: relative;
+}
+
+.neon-flash::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  z-index: -1;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  filter: blur(15px);
+  animation: neonPulse 2s ease-in-out infinite;
 }
 
 .submit-btn {
