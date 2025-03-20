@@ -149,13 +149,15 @@ const PitchForm: React.FC = () => {
             <Label htmlFor="pitchDoc" className="text-navy font-medium">
               Upload pitch Doc:
             </Label>
-            <FileUpload
-              id="pitchDoc"
-              name="pitchDoc"
-              buttonLabel="upload here"
-              onFileChange={handleFileChange}
-              acceptedFileTypes=".pdf,.doc,.docx,.ppt,.pptx"
-            />
+            <div className="flex justify-center">
+              <FileUpload
+                id="pitchDoc"
+                name="pitchDoc"
+                buttonLabel="upload here"
+                onFileChange={handleFileChange}
+                acceptedFileTypes="*"
+              />
+            </div>
           </div>
           
           <FormField
@@ -165,28 +167,30 @@ const PitchForm: React.FC = () => {
               <FormItem className="space-y-2">
                 <FormLabel className="text-navy font-medium">Pitch Presented:</FormLabel>
                 <FormControl>
-                  <RadioGroup
-                    onValueChange={(value) => field.onChange(value === 'true')}
-                    defaultValue={field.value ? 'true' : 'false'}
-                    className="flex items-center space-x-6"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem 
-                        value="true" 
-                        id="yes"
-                        className="border-navy text-navy focus:ring-navy"
-                      />
-                      <label htmlFor="yes" className="cursor-pointer">YES</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem 
-                        value="false" 
-                        id="no" 
-                        className="border-navy text-navy focus:ring-navy"
-                      />
-                      <label htmlFor="no" className="cursor-pointer">NO</label>
-                    </div>
-                  </RadioGroup>
+                  <div className="flex justify-center">
+                    <RadioGroup
+                      onValueChange={(value) => field.onChange(value === 'true')}
+                      defaultValue={field.value ? 'true' : 'false'}
+                      className="flex items-center space-x-10"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem 
+                          value="true" 
+                          id="yes"
+                          className="border-navy text-navy focus:ring-navy"
+                        />
+                        <label htmlFor="yes" className="cursor-pointer">YES</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem 
+                          value="false" 
+                          id="no" 
+                          className="border-navy text-navy focus:ring-navy"
+                        />
+                        <label htmlFor="no" className="cursor-pointer">NO</label>
+                      </div>
+                    </RadioGroup>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -196,8 +200,9 @@ const PitchForm: React.FC = () => {
           <div className="pt-4 flex flex-col items-center">
             <Button
               type="submit"
-              className="submit-btn bg-navy text-cream font-medium py-2 px-8 rounded-md uppercase tracking-wider"
+              className="submit-btn bg-navy hover:bg-navy/90 text-cream font-medium py-2 px-8 rounded-md uppercase tracking-wider shadow-md"
               disabled={submitMutation.isPending}
+              style={{ backgroundColor: "#141D4E" }}
             >
               {submitMutation.isPending ? "SUBMITTING..." : "SUBMIT"}
             </Button>

@@ -17,7 +17,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       onFileChange,
       buttonLabel = "Upload File",
       buttonClassName,
-      acceptedFileTypes = ".pdf,.doc,.docx,.ppt,.pptx",
+      acceptedFileTypes = "*",
       ...props
     },
     ref

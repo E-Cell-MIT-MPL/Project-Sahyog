@@ -7,7 +7,7 @@ const ResourceSection: React.FC = () => {
   const [selectedResource, setSelectedResource] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { data: resources, isLoading, error } = useQuery({
+  const { data: resources = [], isLoading, error } = useQuery({
     queryKey: ['/api/resources'],
   });
 
@@ -53,33 +53,32 @@ const ResourceSection: React.FC = () => {
       <div className="relative">
         <div 
           ref={containerRef}
-          className="resource-container overflow-x-auto pb-6 flex space-x-4 max-w-full"
+          className="flex space-x-4 max-w-full overflow-x-auto pb-6"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {resources?.map((resource: Resource) => (
             <div
               key={resource.id}
-              className={`resource-card flex-shrink-0 w-64 h-32 md:w-72 md:h-40 bg-tan bg-opacity-70 rounded-lg p-4 flex items-center justify-center cursor-pointer ${
+              className={`resource-card flex-shrink-0 w-64 h-32 md:w-72 md:h-40 bg-tan bg-opacity-70 rounded-lg p-4 flex items-center justify-center cursor-pointer shadow-sm hover:shadow-md ${
                 selectedResource === resource.id 
                   ? 'scale-110 z-10 shadow-lg' 
                   : 'scale-100'
               }`}
               onClick={(e) => handleResourceClick(resource.id, e)}
             >
-              <p className="font-serif text-lg text-center text-navy">
-                {resource.title}
+              <div className="text-center">
+                <h3 className="font-serif text-lg font-bold text-navy mb-1">
+                  {resource.title}
+                </h3>
                 {selectedResource === resource.id && (
-                  <span className="block text-sm mt-2 font-sans">
+                  <p className="text-sm font-sans text-navy/80">
                     {resource.description}
-                  </span>
+                  </p>
                 )}
-              </p>
+              </div>
             </div>
           ))}
         </div>
-        
-        <p className="text-center text-xs mt-2 text-navy opacity-80">
-          RESOURCES WILL BE IN HORIZONTAL SCROLL ON CLICKING WILL COME IN CENTER AND ENLARGE
-        </p>
       </div>
     </section>
   );

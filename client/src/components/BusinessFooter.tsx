@@ -1,11 +1,8 @@
 import React from "react";
 
+// Empty footer component
 const BusinessFooter: React.FC = () => {
-  return (
-    <footer className="bg-cream py-4 text-center text-navy text-sm">
-      <p>FOOTER</p>
-    </footer>
-  );
+  return null;
 };
 
 export default BusinessFooter;
