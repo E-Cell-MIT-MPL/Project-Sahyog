@@ -13,17 +13,17 @@
 npm run start
 ```
 
-- Run ESLint checks
+- Run ESLint checks (Javascript errors ke liye)
 ```bash
 npm run lint
 ```
 
-- Run Prettier format checks
+- Run Prettier format checks (formatting check ke liye)
 ```bash
 npm run check
 ```
 
-- Run Prettier to format
+- Run Prettier to format (automatically formatting ke liye)
 ```bash
 npm run format
 ```
