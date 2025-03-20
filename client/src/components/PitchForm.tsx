@@ -7,6 +7,7 @@ import { insertPitchSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { FiZap } from "react-icons/fi";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -86,131 +87,153 @@ const PitchForm: React.FC = () => {
   };
 
   return (
-    <section className="bg-tan bg-opacity-80 rounded-lg p-6 md:p-10 max-w-2xl mx-auto">
-      <h2 className="font-serif text-2xl md:text-3xl text-center mb-8 text-navy">
-        Submit Your Startup Pitch
-      </h2>
+    <div className="relative flex flex-col md:flex-row justify-center items-center gap-8 px-4">
+      <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 z-10 md:hidden">
+        <FiZap size={60} className="text-yellow-400 animate-pulse opacity-80" />
+      </div>
       
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-navy font-medium">Name:</FormLabel>
-                <FormControl>
-                  <Input 
-                    {...field} 
-                    className="form-input bg-cream bg-opacity-70 border-none rounded-md p-2 text-navy" 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="hidden md:flex flex-col items-center justify-center md:w-1/3">
+        <div className="mb-6">
+          <FiZap size={100} className="text-yellow-400 animate-pulse opacity-80" />
+        </div>
+        <div className="text-center">
+          <h3 className="text-white text-xl font-bold mb-2">BUSINESS CLINIC</h3>
+          <p className="text-white opacity-90">Ideas Come to Life</p>
+        </div>
+      </div>
+      
+      <section className="bg-gradient-to-b from-[#E8D4C3] via-[#E0A790] to-[#735585] rounded-lg md:w-2/3 w-full shadow-lg overflow-hidden relative">
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        <div className="relative p-6 md:p-8">
+          <h2 className="font-serif text-2xl md:text-3xl text-center mb-8 text-white">
+            Submit Your Startup Pitch
+          </h2>
           
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-navy font-medium">Email:</FormLabel>
-                <FormControl>
-                  <Input 
-                    {...field} 
-                    type="email"
-                    className="form-input bg-cream bg-opacity-70 border-none rounded-md p-2 text-navy" 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <FormField
-            control={form.control}
-            name="startupName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-navy font-medium">Startup Name:</FormLabel>
-                <FormControl>
-                  <Input 
-                    {...field} 
-                    className="form-input bg-cream bg-opacity-70 border-none rounded-md p-2 text-navy" 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <div className="flex flex-col space-y-2">
-            <Label htmlFor="pitchDoc" className="text-navy font-medium">
-              Upload pitch Doc:
-            </Label>
-            <div className="flex justify-center">
-              <FileUpload
-                id="pitchDoc"
-                name="pitchDoc"
-                buttonLabel="upload here"
-                onFileChange={handleFileChange}
-                acceptedFileTypes="*"
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Name:</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field} 
+                        className="form-input bg-white/30 backdrop-blur-sm border-none rounded-md p-2 text-white placeholder:text-white/70" 
+                        placeholder="Your Name"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-200" />
+                  </FormItem>
+                )}
               />
-            </div>
-          </div>
-          
-          <FormField
-            control={form.control}
-            name="pitchPresented"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="text-navy font-medium">Pitch Presented:</FormLabel>
-                <FormControl>
-                  <div className="flex justify-center">
-                    <RadioGroup
-                      onValueChange={(value) => field.onChange(value === 'true')}
-                      defaultValue={field.value ? 'true' : 'false'}
-                      className="flex items-center space-x-10"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem 
-                          value="true" 
-                          id="yes"
-                          className="border-navy text-navy focus:ring-navy"
-                        />
-                        <label htmlFor="yes" className="cursor-pointer">YES</label>
+              
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Email:</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field} 
+                        type="email"
+                        className="form-input bg-white/30 backdrop-blur-sm border-none rounded-md p-2 text-white placeholder:text-white/70" 
+                        placeholder="your.email@example.com"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-200" />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="startupName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Startup Name:</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field} 
+                        className="form-input bg-white/30 backdrop-blur-sm border-none rounded-md p-2 text-white placeholder:text-white/70" 
+                        placeholder="Your Startup"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-200" />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="pitchDoc" className="text-white">
+                  Upload Pitch Doc:
+                </Label>
+                <div className="flex justify-center">
+                  <FileUpload
+                    id="pitchDoc"
+                    name="pitchDoc"
+                    buttonLabel="upload here"
+                    buttonClassName="bg-white/30 hover:bg-white/40 text-white border-none"
+                    onFileChange={handleFileChange}
+                    acceptedFileTypes="*"
+                  />
+                </div>
+              </div>
+              
+              <FormField
+                control={form.control}
+                name="pitchPresented"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel className="text-white">Pitch Presented:</FormLabel>
+                    <FormControl>
+                      <div className="flex justify-center">
+                        <RadioGroup
+                          onValueChange={(value) => field.onChange(value === 'true')}
+                          defaultValue={field.value ? 'true' : 'false'}
+                          className="flex items-center space-x-10"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem 
+                              value="true" 
+                              id="yes"
+                              className="border-white text-white bg-transparent focus:ring-white"
+                            />
+                            <label htmlFor="yes" className="cursor-pointer text-white">YES</label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem 
+                              value="false" 
+                              id="no" 
+                              className="border-white text-white bg-transparent focus:ring-white"
+                            />
+                            <label htmlFor="no" className="cursor-pointer text-white">NO</label>
+                          </div>
+                        </RadioGroup>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem 
-                          value="false" 
-                          id="no" 
-                          className="border-navy text-navy focus:ring-navy"
-                        />
-                        <label htmlFor="no" className="cursor-pointer">NO</label>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <div className="pt-4 flex flex-col items-center">
-            <Button
-              type="submit"
-              className="submit-btn bg-navy hover:bg-navy/90 text-cream font-medium py-2 px-8 rounded-md uppercase tracking-wider shadow-md"
-              disabled={submitMutation.isPending}
-              style={{ backgroundColor: "#141D4E" }}
-            >
-              {submitMutation.isPending ? "SUBMITTING..." : "SUBMIT"}
-            </Button>
-            <p className="text-xs mt-2 text-navy opacity-70">check your mail!</p>
-          </div>
-        </form>
-      </Form>
-    </section>
+                    </FormControl>
+                    <FormMessage className="text-red-200" />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="pt-4 flex flex-col items-center">
+                <Button
+                  type="submit"
+                  className="submit-btn bg-indigo-900 hover:bg-indigo-800 text-white font-medium py-2 px-8 rounded-md uppercase tracking-wider shadow-md"
+                  disabled={submitMutation.isPending}
+                >
+                  {submitMutation.isPending ? "SUBMITTING..." : "SUBMIT"}
+                </Button>
+                <p className="text-xs mt-2 text-white">check your mail!</p>
+              </div>
+            </form>
+          </Form>
+        </div>
+      </section>
+    </div>
   );
 };
 
