@@ -12,6 +12,13 @@ const ResourceSection: React.FC = () => {
     queryKey: ['/api/resources'],
   });
 
+  // Set the first resource as active initially
+  useEffect(() => {
+    if (resources && resources.length > 0 && activeResource === null) {
+      setActiveResource(resources[0].id);
+    }
+  }, [resources, activeResource]);
+
   // Handle resource card hover
   const handleResourceHover = (id: number | null) => {
     setHoveredResource(id);
@@ -56,6 +63,13 @@ const ResourceSection: React.FC = () => {
 
   return (
     <section className="mb-16 py-8">
+      {/* Tagline above resources */}
+      <div className="max-w-4xl mx-auto mb-8 px-6">
+        <p className="text-lg md:text-xl text-gray-700 italic font-serif leading-relaxed">
+          "Bridging the gap between ideation and execution for aspiring entrepreneurs."
+        </p>
+      </div>
+      
       <div className="relative">
         <div 
           ref={containerRef}
