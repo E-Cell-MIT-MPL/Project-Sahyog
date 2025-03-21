@@ -1,23 +1,19 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+ const MONGODB= process.env.MONGODB_URI|| null;
 
-const MONGODB_URI = process.env.MONGO_URI || null;
-
-const dbConnect = async () => {
-  if (mongoose.connection.readyState >= 1) {
-    return;
+ const connectDB=async()=>{
+  try{
+    const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB}`)
+    console.log('MONGO_DB CONNECTED!!! DB HOST:');
+      }
+  
+  
+  catch(error){
+  console.log("MONGODB connection error 4444444",error);
   }
-
-  try {
-    if (!MONGODB_URI) throw Error("No MongoDB URI provided");
-
-    await mongoose.connect(MONGODB_URI, {
-      dbName: "test",
-    });
-
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("Server: MongoDB connection error - ", error);
+  
   }
-};
+  export default connectDB;
 
-export default dbConnect;

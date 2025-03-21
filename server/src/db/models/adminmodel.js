@@ -1,48 +1,36 @@
 import mongoose, { Schema } from "mongoose";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-
-
-
-const StartupSchema = new Schema(
-  {
-    Startupname: { type: String, required: true , index:true},
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    phoneNumber: { type: String, unique: true, required: true },
-    admin: { type: Schema.Types.ObjectId, ref: "admin", required: true }, 
-    fixed: { type: Boolean, default: true },
-    refreshtoken:{
-      type:String
-    },
-    isVerified: { type: Boolean, default: false },
+const AdminSchema = new Schema({
+  username: { type: String  },
+  email: { type: String,  unique: true },
+  password: { type: String, required: true },
+  startupAssociated: {
+    type: Schema.Types.ObjectId,
+    ref: "startup",
+   
   },
-  { timestamps: true }
-);
+  phoneNumber: { type: String, unique: true, required: true },
 
+  refreshtoken:{
+    type:String
+  }
+},{timestamps:true});
 
-
-
-StartupSchema.pre("save",async  function(next){
+AdminSchema.pre("save",async  function(next){
   // if we dont apply isModified the middleware  the password will keep on encrypted whenever there is any change in any component of database it will only changes when password changes
   if(this.isModified("password")){
-    
       this.password= await  bcrypt.hash(this.password,10);
-   
   }
 
    next();
-
-
-
-
 });// methods to verify  encrypted password and db  password is same
-StartupSchema.methods.isPassword=async function (password){
+AdminSchema.methods.isPassword=async function (password){
 
  return await bcrypt.compare(password,this.password);
 }
-StartupSchema.methods.generateAccesstokens= function(){
+AdminSchema.methods.generateAccesstokens= function(){
   return jwt.sign(
       {
           _id:this.id,
@@ -61,7 +49,7 @@ StartupSchema.methods.generateAccesstokens= function(){
 
 
 
-StartupSchema.methods.generateRefreshTokens= function(){
+AdminSchema.methods.generateRefreshTokens= function(){
   return jwt.sign(
       {
   
@@ -74,11 +62,7 @@ StartupSchema.methods.generateRefreshTokens= function(){
   )
   
   }
-   export const startup =  mongoose.model("startup", StartupSchema);
 
-
-
-
-
+export  const  admin =  mongoose.model("admin", AdminSchema);
 
 
