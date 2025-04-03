@@ -1,0 +1,214 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  .light-mode {
+    @apply bg-white text-slate-900;
+  }
+
+  .light-mode .glass-card {
+    @apply bg-white/30 backdrop-blur-lg border border-slate-200;
+  }
+
+  .light-mode .glass-card:hover {
+    @apply border-slate-300 bg-white/50;
+  }
+
+  .light-mode .glass-card::before {
+    @apply bg-gradient-to-br from-slate-100/70 via-white/10 to-slate-100/70;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-black text-white antialiased;
+  }
+
+  /* Default dark mode styles */
+  .parallax-container {
+    @apply overflow-hidden;
+    perspective: 1200px;
+  }
+
+  .parallax-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+  }
+
+  .parallax-element {
+    transform: translateZ(40px) scale(0.96);
+    transition: transform 0.2s ease-out;
+  }
+
+  .btn-hover-effect {
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
+  }
+
+  .btn-hover-effect:after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[2px] w-0 bg-white transition-all duration-300 ease-out;
+  }
+
+  .btn-hover-effect:hover:after {
+    @apply w-full;
+  }
+
+  /* Enhanced glass card with more vibrant gradients but without glow */
+  .glass-card {
+    @apply relative overflow-hidden rounded-xl border border-zinc-800 bg-black/20 backdrop-blur-lg transition duration-300;
+  }
+
+  .glass-card:hover {
+    @apply border-indigo-500/40 bg-black/40 scale-[1.02] shadow-md;
+  }
+
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 -z-10 bg-gradient-to-br from-indigo-900/30 via-black/5 to-purple-900/30 opacity-60;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Light mode overrides with enhanced colors */
+  .light-mode .btn-hover-effect:after {
+    @apply bg-indigo-800;
+  }
+
+  /* Light mode glass card */
+  .light-mode .glass-card::before {
+    @apply bg-gradient-to-br from-indigo-100/70 via-white/10 to-purple-100/70;
+  }
+  
+  /* Grid pattern for loading screen */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(99, 102, 241, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* Animation for soft pulse */
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+  
+  /* Animation for subtle bounce */
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce-subtle 3s ease-in-out infinite;
+  }
+  
+  /* Animation for float */
+  @keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-float {
+    animation: floating 6s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Enhanced text gradients */
+  .text-gradient {
+    @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .light-mode .text-gradient {
+    @apply from-indigo-600 via-purple-600 to-pink-500;
+  }
+  
+  /* New utilities for enhanced animations */
+  .hover-lift {
+    @apply transition-all duration-300 hover:translate-y-[-8px];
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20;
+  }
+  
+  .gradient-text-blue {
+    @apply bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-purple {
+    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-gold {
+    @apply bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent;
+  }
+}
