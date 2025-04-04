@@ -1,8 +1,11 @@
 import jwt from "jsonwebtoken";
-import asyncHandler from "../utilities/asynchandler.js";
+
 import { admin } from "../db/models/adminmodel.js";
 import { startup } from "../db/models/startupModel.js";
-export const VerifyJWT = asyncHandler(async (req, res, next) => {
+import asyncHandler from "../utilities/asynchandler.js";
+import ApiError from "../utilities/ApiError.js";
+
+export const verifyJWT = asyncHandler(async (req, _res, next) => {
   try {
     // Extract token from cookies or headers
     const token =

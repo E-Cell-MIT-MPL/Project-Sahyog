@@ -19,16 +19,18 @@ const StartupSchema = new Schema(
 );
 
 StartupSchema.pre("save", async function (next) {
-  // if we dont apply isModified the middleware  the password will keep on encrypted whenever there is any change in any component of database it will only changes when password changes
+  // Only runs when password field changes
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
   next();
-}); // methods to verify  encrypted password and db  password is same
+});
+
 StartupSchema.methods.isPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+
 StartupSchema.methods.generateAccesstokens = function () {
   return jwt.sign(
     {
@@ -55,4 +57,5 @@ StartupSchema.methods.generateRefreshTokens = function () {
     },
   );
 };
+
 export const startup = mongoose.model("startup", StartupSchema);

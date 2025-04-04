@@ -19,10 +19,11 @@ const sendOTP = async (phoneNumber, otp) => {
       from: +13025084590,
       to: phoneNumber,
     });
-    console.log(`OTP sent to ${phoneNumber}`);
+
+    console.log(`Server: OTP sent to ${phoneNumber}`);
   } catch (error) {
-    console.error("Error sending OTP:", error);
-    throw new Error("Failed to send OTP. Please try again.");
+    console.error("Server: Error sending OTP:", error);
+    throw new Error("Server: Failed to send OTP. Please try again.");
   }
 };
 

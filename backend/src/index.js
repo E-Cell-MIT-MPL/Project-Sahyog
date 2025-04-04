@@ -1,15 +1,12 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-import dbConnect from "./db/connect.js";
-import adminroutes from "./routes/admin.route.js";
-import startuproutes from "./routes/startup.route.js";
 import session from "express-session";
 
-dotenv.config({
-  path: "./env",
-});
+import dbConnect from "./db/connect.js";
+import startuproutes from "./routes/startup.route.js";
+import adminroutes from "./routes/admin.route.js";
+
 const app = express();
 
 await dbConnect();
@@ -24,12 +21,13 @@ const corsOptions = {
 // Middlewares
 app.use(express.json());
 app.use(cors(corsOptions));
+
 app.use(
   session({
-    secret: "supersecretkey", // Change this to a strong secret
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
+    cookie: { secure: false }, // TODO Set to true if using HTTPS
   }),
 );
 
