@@ -7,7 +7,8 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": " nodemon -r dotenv/config --experimental-modules src/index.js",
+    "dev": " nodemon -r dotenv/config src/index.js",
+    "start": "node -r dotenv/config src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint src/**/*.js",
     "check": "npx prettier src --check",

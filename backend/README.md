@@ -3,12 +3,18 @@
 ## ENV checklist
 
 - Copy [`example.env`](./example.env) to make a `.env` file.
-- MONGO_URI points to the MongoDB connection string, error logged if not provided
+- MONGODB_URI points to the MongoDB connection string, error logged if not provided
 - PORT points to the PORT to use, if not specified `5500` is used.
 - FRONTEND_LOCAL_URL points to frontend URL for CORS configuration if any
+- TWILIO_... environment variables refer to Twilio Configuration
 
 ## NPM Commands Checklist
-- Running the express server
+- Running the developmental express server
+```bash
+npm run dev
+```
+
+- Running the production express server
 ```bash
 npm run start
 ```
